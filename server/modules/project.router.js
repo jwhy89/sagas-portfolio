@@ -1,10 +1,10 @@
 const express = require('express');
-const pool = require('../modules/pool');
+const pool = require('./pool');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    console.log('Get portfolio from DB');
+    console.log('Get projects from DB');
     const queryText = `SELECT "projects"."name", "projects"."description", 
         "projects"."thumbnail", "projects"."website", "projects"."github", 
         "projects"."date_completed", "tags"."name" AS "tag_name"
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
             res.send(result.rows);
         })
         .catch((err) => {
-            console.log('Error completing SELECT portfolio query', err);
+            console.log('Error completing SELECT projects query', err);
             res.sendStatus(500);
         });
 });

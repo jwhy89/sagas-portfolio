@@ -4,20 +4,42 @@ import './index.css';
 import App from './components/App/App.js';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import axios from 'axios';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
+import { takeEvery, put } from 'redux-saga/effects';
 
 // Create the rootSaga generator function
-function* rootSaga() {
+function* rootSaga(action) {
+    yield takeEvery('GET_PROJECTS', projectListSaga);
+}
 
+// ------ SAGAS -------
+function* projectListSaga(action) {
+    console.log('Hit the project saga', action);
+
+    try {
+        const getResponse = yield axios.get('/project');
+        console.log(getResponse);
+        const action = {
+            type: 'SET_PROJECTS',
+            payload: getResponse.data
+        };
+        // Dispatch (using put) an action to our reducers to update our redux store 
+        yield put(action);
+    } catch (error) {
+        console.log(`Couldn't get projects`, error);
+        alert(`Sorry, couldn't get the projects. Try again later`);
+    }
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
+// Project list reducer - will hold projects from server
 // Used to store projects returned from the server
 const projects = (state = [], action) => {
     switch (action.type) {
