@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './App.css';
-import Header from '../Header/Header';
+import ProjectList from '../ProjectList/ProjectList';
+import Admin from '../Admin/Admin';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 
@@ -15,10 +17,13 @@ class App extends Component {
   // Renders the entire app on the DOM
   render() {
     return (
-      <div className="App">
-        <Header />
+      <Router>
+        <div className="App">
+          <Route exact path="/" component={ProjectList} />
 
-      </div>
+          <Route exact path="/admin" component={Admin} />
+        </div>
+      </Router>
     );
   }
 }
