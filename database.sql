@@ -25,3 +25,21 @@ VALUES
     ('SQL'),
     ('Redux'),
     ('HTML');
+
+-- insert test data
+INSERT INTO "projects"
+    ("name", "description", "thumbnail", "website", "github", "date_completed", "tag_id")
+VALUES
+    ('Ultimate Guessing Game',
+        'Ultimate Guessing Game Description',
+        'URL will go here',
+        'https://damp-brook-21340.herokuapp.com/',
+        'https://github.com/jwhy89/group-number-guessing-game-starter',
+        '3-15-2019',
+        2);
+    
+-- select all data
+-- TEST SQL GET w/ JOIN
+SELECT "projects"."name", "projects"."description", "projects"."thumbnail", "projects"."website", "projects"."github", "projects"."date_completed", "tags"."name" AS "tag_name"
+FROM "projects"
+    JOIN "tags" ON "projects"."tag_id"="tags"."id";
