@@ -5,9 +5,14 @@ import Header from '../Header/Header';
 class ProjectList extends Component {
     render() {
         return (
-            <div>
-                <Header />
-            </div>
+            <section>
+                <div>
+                    <Header />
+                </div>
+                <div>
+
+                </div>
+            </section>
         );
     }
 }
