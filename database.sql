@@ -40,6 +40,7 @@ VALUES
     
 -- select all data
 -- TEST SQL GET w/ JOIN
-SELECT "projects"."name", "projects"."description", "projects"."thumbnail", "projects"."website", "projects"."github", "projects"."date_completed", "tags"."name" AS "tag_name"
+SELECT "projects"."id", "projects"."name", "projects"."description", "projects"."thumbnail", "projects"."website", "projects"."github", "projects"."date_completed", "tags"."name" AS "tag_name"
 FROM "projects"
-    JOIN "tags" ON "projects"."tag_id"="tags"."id";
+    JOIN "tags" ON "projects"."tag_id"="tags"."id"
+    ORDER BY "projects"."date_completed" DESC;

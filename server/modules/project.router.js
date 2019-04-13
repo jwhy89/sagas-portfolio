@@ -5,11 +5,12 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     console.log('Get projects from DB');
-    const queryText = `SELECT "projects"."name", "projects"."description", 
+    const queryText = `SELECT "projects"."id", "projects"."name", "projects"."description", 
         "projects"."thumbnail", "projects"."website", "projects"."github", 
         "projects"."date_completed", "tags"."name" AS "tag_name"
         FROM "projects"
-        JOIN "tags" ON "projects"."tag_id"="tags"."id";`;
+        JOIN "tags" ON "projects"."tag_id"="tags"."id"
+        ORDER BY "projects"."date_completed" DESC;`;
     pool.query(queryText)
         .then((result) => {
             res.send(result.rows);
