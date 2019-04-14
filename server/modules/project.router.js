@@ -21,6 +21,24 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/admin', (req, res) => {
+    console.log('Get projects from DB');
+    const queryText = `SELECT "projects"."id", "projects"."name", "projects"."description", 
+        "projects"."thumbnail", "projects"."website", "projects"."github", 
+        "projects"."date_completed", "tags"."name" AS "tag_name"
+        FROM "projects"
+        JOIN "tags" ON "projects"."tag_id"="tags"."id"
+        ORDER BY "projects"."name" ASC;`;
+    pool.query(queryText)
+        .then((result) => {
+            res.send(result.rows);
+        })
+        .catch((err) => {
+            console.log('Error completing SELECT projects query', err);
+            res.sendStatus(500);
+        });
+});
+
 // router.get('/details/:id', (req, res) => {
 //     const queryText = 'SELECT * FROM plant WHERE id=$1';
 //     pool.query(queryText, [req.params.id])
