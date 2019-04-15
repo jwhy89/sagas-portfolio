@@ -74,6 +74,7 @@ function* addProjectSaga(action) {
             // call get request and rerender w/ new list values
             type: 'GET_PROJECTS'
         });
+        yield alert(`SHAZAAM!!! You did it! Project Added!!!`);
     } catch (error) {
         console.log(`Couldn't add project`, error);
         alert(`Sorry, couldn't add the project. Try again later`);
