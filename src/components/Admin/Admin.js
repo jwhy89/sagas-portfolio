@@ -1,4 +1,5 @@
 import React from 'react';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AdminForm from '../AdminForm/AdminForm';
 import PropTypes from 'prop-types';
@@ -46,6 +47,9 @@ function Admin(props) {
                 <h1 className="App-title">Admin</h1>
             </header>
         </div>
+        <Router>
+            <button><Link to="/">Back to Projects</Link></button>
+        </Router>
         <AdminForm />
         <Paper className={classes.root}>
         <Table className={classes.table}>
