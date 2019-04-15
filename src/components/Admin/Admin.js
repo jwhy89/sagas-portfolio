@@ -34,7 +34,7 @@ const styles = theme => ({
 function Admin(props) {
   const { classes } = props;
 
-   // saga function to delete project
+   // function to delete project with reducer
    // had to map the project id into the arrow button 
    // no state on component to access
    function deleteProject(projectID) {
