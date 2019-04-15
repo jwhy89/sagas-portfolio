@@ -27,21 +27,14 @@ const styles = theme => ({
   },
 });
 
-// const deleteProject = (event, props) => {
-//     props.dispatch({
-//         type: 'DELETE_PROJECT',
-//         payload: props.project.id
-//     });
-// }
-
 function Admin(props) {
   const { classes } = props;
 
-   function deleteProject(event) {
-      console.log(event);
+   function deleteProject(projectID) {
+      console.log(projectID);
       props.dispatch({
           type: 'DELETE_PROJECT',
-          payload: event.target.value
+          payload: projectID
       });
   }
 
@@ -69,7 +62,7 @@ function Admin(props) {
                 </TableCell>
                 <TableCell align="right">
                     <Button type="button" className={classes.button}
-                    onClick={deleteProject} value="projectItem.id">DELETE
+                    onClick={() => deleteProject(projectItem.id)}>DELETE
                     </Button>
                 </TableCell>
                 </TableRow>
@@ -89,4 +82,7 @@ Admin.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapReduxStateToProps)(withStyles(styles)(Admin));
+// export default connect(mapReduxStateToProps)(withStyles(styles)(Admin));
+
+const StyledAdmin = withStyles(styles)(Admin);
+export default connect(mapReduxStateToProps)(StyledAdmin);
