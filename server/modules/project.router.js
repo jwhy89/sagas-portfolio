@@ -21,23 +21,36 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/admin', (req, res) => {
-    console.log('Get projects from DB');
-    const queryText = `SELECT "projects"."id", "projects"."name", "projects"."description", 
-        "projects"."thumbnail", "projects"."website", "projects"."github", 
-        "projects"."date_completed", "tags"."name" AS "tag_name"
-        FROM "projects"
-        JOIN "tags" ON "projects"."tag_id"="tags"."id"
-        ORDER BY "projects"."name" ASC;`;
+// Was thinking about creating a new admin route to sort by name but decided not to
+// router.get('/admin', (req, res) => {
+//     console.log('Get projects from DB');
+//     const queryText = `SELECT "projects"."id", "projects"."name", "projects"."description", 
+//         "projects"."thumbnail", "projects"."website", "projects"."github", 
+//         "projects"."date_completed", "tags"."name" AS "tag_name"
+//         FROM "projects"
+//         JOIN "tags" ON "projects"."tag_id"="tags"."id"
+//         ORDER BY "projects"."name" ASC;`;
+//     pool.query(queryText)
+//         .then((result) => {
+//             res.send(result.rows);
+//         })
+//         .catch((err) => {
+//             console.log('Error completing SELECT projects query', err);
+//             res.sendStatus(500);
+//         });
+// });
+
+router.get('/tags', (req, res) => {
+    const queryText = `SELECT * FROM "tags" ORDER BY "id";`;
     pool.query(queryText)
-        .then((result) => {
-            res.send(result.rows);
-        })
-        .catch((err) => {
-            console.log('Error completing SELECT projects query', err);
-            res.sendStatus(500);
-        });
-});
+      .then((result) => { 
+          res.send(result.rows);
+      })
+      .catch((err) => {
+        console.log('Error getting tag data', err);
+        res.sendStatus(500);
+      });
+  });
 
 router.post('/', (req, res) => {
     const newProject = req.body;
