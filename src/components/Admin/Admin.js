@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import AdminForm from '../AdminForm/AdminForm';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -45,7 +46,7 @@ function Admin(props) {
                 <h1 className="App-title">Admin</h1>
             </header>
         </div>
-        <form>Add New Project</form>
+        <AdminForm />
         <Paper className={classes.root}>
         <Table className={classes.table}>
             <TableHead>

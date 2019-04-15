@@ -16,6 +16,7 @@ import { takeEvery, put } from 'redux-saga/effects';
 function* rootSaga(action) {
     yield takeEvery('GET_PROJECTS', projectListSaga);
     yield takeEvery('DELETE_PROJECT', deleteProjectSaga);
+    yield takeEvery('ADD_PROJECT', addProjectSaga)
 }
 
 // ------ SAGAS -------
@@ -48,6 +49,20 @@ function* deleteProjectSaga(action) {
     } catch (error) {
         console.log(`Couldn't delete project`, error);
         alert(`Sorry, couldn't delete the project. Try again later`);
+    }
+}
+
+function* addProjectSaga(action) {
+    console.log('hit the add project saga', action);
+    try {
+        yield axios.post( '/project', action.payload);
+        yield put({
+            // call get request and rerender w/ new list values
+            type: 'GET_PROJECTS'
+        });
+    } catch (error) {
+        console.log(`Couldn't add project`, error);
+        alert(`Sorry, couldn't add the project. Try again later`);
     }
 }
 
