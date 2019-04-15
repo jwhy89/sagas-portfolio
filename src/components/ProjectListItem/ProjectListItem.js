@@ -59,11 +59,12 @@ const ProjectListItem = (props) => {
           </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" variant="contained" className={classes.button}>
-          <a href={props.project.github} rel="noopener noreferrer" target="_blank">GitHub</a>
-        </Button>
-        <Button size="small" variant="contained" className={classes.button}>
-          <a href={props.project.website} rel="noopener noreferrer" target="_blank">Website</a>
+        <Button size="small" variant="contained" className={classes.button} 
+          href={props.project.github} rel="noopener noreferrer" target="_blank">
+          GitHub</Button>
+        <Button size="small" variant="contained" className={classes.button}
+          href={props.project.website} rel="noopener noreferrer" target="_blank">
+          Website
         </Button>
       </CardActions>
     </Card>
