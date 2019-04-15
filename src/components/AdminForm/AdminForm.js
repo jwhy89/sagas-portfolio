@@ -8,7 +8,7 @@ const emptyProject = {
   website: '',
   github: '',
   date_completed: '',
-  tag_id: 0
+  tag_id: ''
 }
 
 class AdminForm extends Component {
@@ -17,6 +17,10 @@ class AdminForm extends Component {
     newProject: emptyProject
   }
 
+  componentDidMount() {
+    this.props.dispatch( {type: 'GET_TAGS'} );
+  }
+  
   handleChangeFor = propertyName => {
     return (event) => {
       this.setState({
@@ -54,7 +58,6 @@ class AdminForm extends Component {
             <input type="text" disabled hidden
                    onChange={this.handleChangeFor('thumbnail')}
                    value={this.state.newProject.thumbnail}></input>
-            <br />
             <label>Website:</label>
             <input type="text" 
                    onChange={this.handleChangeFor('website')}
@@ -70,10 +73,12 @@ class AdminForm extends Component {
                    onChange={this.handleChangeFor('date_completed')}
                    value={this.state.newProject.date_completed}></input>
             <br />
-            <label>Tag ID:</label>
-            <input type="text" 
-                   onChange={this.handleChangeFor('tag_id')}
-                   value={this.state.newProject.tag_id}></input>
+            <select onChange={this.handleChangeFor('tag_id')}>
+                   <option selected disabled >Select a Tag</option>
+                   {this.props.reduxState.tags.map( tag => 
+                        <option  value={tag.id} key={tag.id}>{tag.name}</option>
+                   )}
+            </select>
             <br />
             <button type="submit">Add</button>
           </form>
@@ -83,4 +88,8 @@ class AdminForm extends Component {
 
 }
 
-export default connect()(AdminForm);
+const mapReduxStateToProps = (reduxState) => ({
+    reduxState,
+});
+  
+export default connect( mapReduxStateToProps )(AdminForm);

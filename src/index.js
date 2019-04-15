@@ -16,7 +16,8 @@ import { takeEvery, put } from 'redux-saga/effects';
 function* rootSaga(action) {
     yield takeEvery('GET_PROJECTS', projectListSaga);
     yield takeEvery('DELETE_PROJECT', deleteProjectSaga);
-    yield takeEvery('ADD_PROJECT', addProjectSaga)
+    yield takeEvery('ADD_PROJECT', addProjectSaga);
+    yield takeEvery('GET_TAGS', tagListSaga)
 }
 
 // ------ SAGAS -------
@@ -35,6 +36,19 @@ function* projectListSaga(action) {
     } catch (error) {
         console.log(`Couldn't get projects`, error);
         alert(`Sorry, couldn't get the projects. Try again later`);
+    }
+}
+
+function* tagListSaga (action) {
+    console.log( `in tagListSaga...` );
+    
+    try {
+        const response = yield axios.get( '/project/tags');
+        yield put( {type: 'SET_TAGS', payload: response.data} );
+    }
+    catch (error) {
+        console.log(`Couldn't get tags.`, error);
+        alert(`Sorry couldn't get tags. Try again later.`);
     }
 }
 
