@@ -4,7 +4,8 @@
 
 
 .App-header {
-  background-color: rgb(18, 49, 88);
+  /* background-color: rgb(18, 49, 88); */
+  background: linear-gradient(360deg, #1C1C1C 10%, #494949 360%);
   height: 150px;
   padding: 20px;
   color: white;
