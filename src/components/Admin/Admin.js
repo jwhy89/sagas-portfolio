@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import AdminForm from '../AdminForm/AdminForm';
 import PropTypes from 'prop-types';
@@ -12,6 +12,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+// styling with material ui
 const styles = theme => ({
   root: {
     width: '100%',
@@ -29,9 +30,13 @@ const styles = theme => ({
   },
 });
 
+// stateless component to render materia ui table
 function Admin(props) {
   const { classes } = props;
 
+   // saga function to delete project
+   // had to map the project id into the arrow button 
+   // no state on component to access
    function deleteProject(projectID) {
       console.log(projectID);
       props.dispatch({

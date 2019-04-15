@@ -17,10 +17,12 @@ class AdminForm extends Component {
     newProject: emptyProject
   }
 
+  // load tags before rendering
   componentDidMount() {
     this.props.dispatch( {type: 'GET_TAGS'} );
   }
   
+  // function to keep the inputs available for handleSubmit
   handleChangeFor = propertyName => {
     return (event) => {
       this.setState({
@@ -32,6 +34,7 @@ class AdminForm extends Component {
     }
   }
 
+  // function to send inputs to reducer
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch( { type: 'ADD_PROJECT', payload: this.state.newProject })

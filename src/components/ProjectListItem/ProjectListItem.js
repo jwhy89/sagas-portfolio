@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 const moment = require('moment');
 
+// styling with material ui
 const styles = theme => ({
   card: {
     display: 'inline-block',

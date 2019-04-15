@@ -7,7 +7,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
 
-  // 
+  // load projects before rendering
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_PROJECTS'
