@@ -95,7 +95,7 @@ const projects = (state = [], action) => {
     }
 }
 
-// Used to store the project tags (e.g. 'React', 'jQuery', 'Angular', 'Node.js')
+// Used to store the project tags (e.g. 'Mammal', 'Bird', 'Fish', 'Reptile', 'Amphibian')
 const tags = (state = [], action) => {
     switch (action.type) {
         case 'SET_TAGS':

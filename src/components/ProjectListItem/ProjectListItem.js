@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -31,8 +31,35 @@ const styles = theme => ({
   },
 });
 
-const ProjectListItem = (props) => {
-  const { classes } = props;
+class ProjectListItem extends Component {
+  
+    // Can now add componentDidMount() - if we wanted to...
+
+    getCardImage = (project, classes) => {
+      if ( project.thumbnail !== '' && project.thumbnail !== null ) {
+        return <CardMedia
+          component="img"
+          alt="project"
+          className={classes.media}
+          height="200"
+          image={project.thumbnail}
+          title={project.name}
+        />
+      }
+  
+      return null;
+    }
+
+  render() {
+
+  const { classes } = this.props;
+
+  let websiteHUBJsx = 'Sorry no link';
+  if (this.props.project.website !== '' && this.props.project.website !== null) {
+  websiteHUBJsx = <Button size="small" variant="contained" className={classes.button} 
+    href={this.props.project.website} rel="noopener noreferrer" target="_blank">
+    Website</Button>
+    }
 
   return (
     <div>
@@ -43,34 +70,37 @@ const ProjectListItem = (props) => {
           alt="project"
           className={classes.media}
           height="200"
-          image={props.project.thumbnail}
-          title={props.project.name}
+          image={this.props.project.thumbnail}
+          title={this.props.project.name}
         />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {props.project.name}
+              {this.props.project.name}
           </Typography>
             <Typography component="p">
-              {props.project.description}
+              {this.props.project.description}
               <br/>
-              <span>Date Completed: {moment(props.project.date_completed).format('YYYY-MM-DD')}</span>
+              <span>Date Completed: {moment(this.props.project.date_completed).format('YYYY-MM-DD')}</span>
               <br/>
-              <span>{props.project.tag_name}</span>
+              <span>{this.props.project.tag_name}</span>
           </Typography>
           </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" variant="contained" className={classes.button} 
-          href={props.project.github} rel="noopener noreferrer" target="_blank">
-          GitHub</Button>
         <Button size="small" variant="contained" className={classes.button}
+            href={this.props.project.github} rel="noopener noreferrer" target="_blank">
+            GitHub
+          </Button>
+        {/* <Button size="small" variant="contained" className={classes.button}
           href={props.project.website} rel="noopener noreferrer" target="_blank">
           Website
-        </Button>
+        </Button> */}
+        {websiteHUBJsx}
       </CardActions>
     </Card>
     </div>
   )
+}
 }
 
 ProjectListItem.propTypes = {
